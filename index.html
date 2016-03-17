@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>AnyYolk</title>
+    <title>Endju game</title>
     <meta name="description" content="Endju Game">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     
@@ -70,7 +70,7 @@
     <div id="stage" class="">
       <h1 id="unsupported">Sorry, your browser is not supported. Try using <a href="www.google.com/chrome/">Google Chrome</a>.</h1>
     </div>
-    <h1 id="landscape">Sorry, this game does not work in landscape orientation.</h1>
+    <h1 id="landscape">Desculpe, este jogo não funciona na orientação paisagem.</h1>
 
 
     <!-- Templates -->
@@ -113,11 +113,11 @@
     <!-- Game HUD -->
     <script type="text/template" id="_game_level">
       <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
-      <p id="game_level" class="<%= sizeClass %>">LEVEL: <%= level %></p>
+      <p id="game_level" class="<%= sizeClass %>">NIVEL: <%= level %></p>
     </script>
     <script type="text/template" id="_game_score">
       <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
-      <p id="game_score" class="<%= sizeClass %>">SCORE: <%= score %><span> eggs</span></p>
+      <p id="game_score" class="<%= sizeClass %>">PONTO: <%= score %><span> eggs</span></p>
     </script>
     <script type="text/template" id="_game_lives">
       <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
@@ -144,9 +144,9 @@
           <thead>
             <tr>
               <th class="rank">Rank</th>
-              <th class="name">Name</th>
-              <th class="score">Score</th>
-              <th class="date">Date</th>
+              <th class="name">Nome</th>
+              <th class="score">Pontos</th>
+              <th class="date">Data</th>
             </tr>
           </thead>
           <tbody>
@@ -179,7 +179,7 @@
         <div class="facebook_button active"><img class="fb_content" src="assets/facebook_icon.png"/><span class="fb_content">Submit score</span></div>
       </div>
       <div class="menu_item menu_button <%= sizeClass %>">MENU</div>
-      <div class="menu_item replay_button <%= sizeClass %>">RETRY</div>
+      <div class="menu_item replay_button <%= sizeClass %>">REPETIR</div>
     </script>
 
     <!-- Credits -->
@@ -190,10 +190,10 @@
         <p class="parse">Parse</p>
         <div class="tutorial">
           <div class="icon" />
-          <a href="http://parse.com/anyyolk">Check out the tutorial!</a>
+          <a href="http://api.endjubusiness.co.ao.com/endjugame">Veja nossos tutorias!</a>
         </div>
       </div>
-      <div class="menu_item back_button">BACK</div>    
+      <div class="menu_item back_button">VOLTAR</div>
     </script>
   </body>
 

@@ -16,7 +16,7 @@ Parse.initialize ( "APPLICATION_ID", "CLIENT_KEY");
 
 Configuração ### Código Nuvem (Cloud Code)
 1. Instale o [ferramenta de linha de comando Parse] (https://parse.com/docs/cloud_code_guide#started) usando `enrolar -s https://www.parse.com/downloads/cloud_code/installer.sh | sudo / bin / bash`
-2. Execute o `analisar cloudCode` novo comando a partir do diretório raiz para inicializar o código de nuvem com suas chaves Endju APP (siga as instruções na tela).
+2. Execute o `parse new cloudCode` novo comando a partir do diretório raiz para inicializar o código de nuvem com suas chaves Endju APP (siga as instruções na tela).
 3. Navegue até o diretório `` / cloudCode` usando cd cloudCode` e executar o `parse deploy` comando para implementar o Cloud Code.
 
 ### Configuração Facebook
