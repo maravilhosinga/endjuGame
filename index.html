@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>AnyYolk</title>
+    <meta name="description" content="My Parse App">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    
+    <link href='https://fonts.googleapis.com/css?family=Raleway:100' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    
+    <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+    <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <!-- Icons for the iOS homescreen-->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-startup-image" href="/assets/splash.png">
+    <link rel="apple-touch-startup-image" href="assets/splash_1136.png" media="(device-height: 568px)">
+    <link rel="apple-touch-startup-image" href="assets/splash@2x.png" media="(device-height: 480px)">
+
+    <!-- Libraries -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/backbone.js"></script>
+    <script type="text/javascript" src="js/spin.min.js"></script>
+    <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.2.7.min.js"></script>
+
+    <!-- App code -->
+    <script type="text/javascript" src="js/main.js"></script>
+  </head>
+
+  <body>
+    <!-- Facebook integration -->
+    <div id="fb-root"></div>
+    <script>
+      //***********************************************************
+      // Be sure to add your Parse Keys and Facebook App ID Below!
+      //***********************************************************
+
+      // Initialize Parse
+      Parse.initialize("YOUR_APP_ID", "YOUR_JAVASCRIPT_KEY");
+
+      // Initialize the Facebook SDK with Parse as described at 
+      // https://parse.com/docs/js_guide#fbusers
+      window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        Parse.FacebookUtils.init({
+          appId      : 'YOUR_FACEBOOK_APP_ID', // Facebook App ID
+          channelUrl : '//www.anyyolk.com/channel.html', // Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow Parse to access the session
+          xfbml      : true  // parse XFBML
+        });
+      };
+      (function(d, debug){
+         var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+         ref.parentNode.insertBefore(js, ref);
+       }(document, /*debug*/ false));
+    </script>
+
+    <!-- This is the game! -->
+    <div id="stage" class="">
+      <h1 id="unsupported">Sorry, your browser is not supported. Try using <a href="www.google.com/chrome/">Google Chrome</a>.</h1>
+    </div>
+    <h1 id="landscape">Sorry, this game does not work in landscape orientation.</h1>
+
+
+    <!-- Templates -->
+    <!-- Tile -->
+    <script type="text/template" id="_tile_pair">
+      <div class='tile' />
+    </script>
+
+    <!-- Tree -->
+    <script type="text/template" id="_tree">
+      <img class='tree' src='/assets/tree_<%= treeNum > -1 ? treeNum : Math.floor(Math.random()*3)+1 %>.png' style='left: <%= leftValue %>px' />
+    </script>
+
+    <!-- Cloud -->
+    <script type="text/template" id="_cloud">
+      <div class='cloud <%= direction %>' 
+           style='top: <%= topValue %>px; left: -200px;<%= Utils.bp() %>animation-delay: <%= delay %>s;<%= Utils.bp() %>animation-duration: <%= duration %>s;' />
+    </script>
+
+    <!-- Sun -->
+    <script type="text/template" id="_sun">
+      <img class='sun' src='/assets/sun.png' style='right: 200px' />
+    </script>
+
+    <!-- Menu -->
+    <script type="text/template" id="_menu">
+      <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
+      <div class="title <%= sizeClass %>"></div>
+      <div id="play_button" class="menu_item first <%= sizeClass %>">
+        PLAY
+      </div>
+      <div id="highscore_button" class="menu_item second <%= sizeClass %>">
+        HIGHSCORE
+      </div>
+      <div id="credits_button" class="menu_item third <%= sizeClass %>">
+        CREDITS
+      </div>
+    </script>
+
+    <!-- Game HUD -->
+    <script type="text/template" id="_game_level">
+      <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
+      <p id="game_level" class="<%= sizeClass %>">LEVEL: <%= level %></p>
+    </script>
+    <script type="text/template" id="_game_score">
+      <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
+      <p id="game_score" class="<%= sizeClass %>">SCORE: <%= score %><span> eggs</span></p>
+    </script>
+    <script type="text/template" id="_game_lives">
+      <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
+      <p id="game_lives" class="<%= sizeClass %>">LIVES: <%= lives %></p>
+    </script>
+
+    <!-- Game Egg -->
+    <script type="text/template" id="_egg">
+      <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
+      <% for (var i = 0; i < 5; i++) { %>
+        <div class="sprite <%= sizeClass %> egg_sprite_<%= i+1 %>"
+              <%= (i+1) !== spriteIndex ? " style='display: none'" : "" %>>
+          <div class="cloud"></div>        
+        </div>
+      <% } %>
+    </script>
+
+    <!-- Highscore -->
+    <script type="text/template" id="_highscore">
+      <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
+      <div class="highscore <%= sizeClass %>">
+        <p>TOP 10</p>
+        <table id="score_table">
+          <thead>
+            <tr>
+              <th class="rank">Rank</th>
+              <th class="name">Name</th>
+              <th class="score">Score</th>
+              <th class="date">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="menu_item back_button">BACK</div>
+    </script>
+
+    <script type="text/template" id="_score">
+    <% var dateString = (score.createdAt.getMonth()+1) + "/" + score.createdAt.getDate() + "/" + score.createdAt.getFullYear(); %>
+      <tr height="20">
+        <td class="rank"><%= index+1 %></td>
+        <td class="name"><%= score.get("player").get("displayName") %></td>
+        <td class="score"><%= score.get("score") %></td>
+        <td class="date"><%= dateString %></td>
+      </tr>
+    </script>
+
+    <!-- Game Over -->
+    <script type="text/template" id="_game_over">
+      <% var sizeClass = $(window).width() > 550 ? "" : "small"; %>
+      <div class="summary <%= sizeClass %>">
+        <h2 class="title">You saved</h2>
+        <div class="end_score">
+          <span class="score"><%= score %></span>
+          <span class="label">eggs</span>
+        </div>
+        <h2 class="message"><%= congrats %></h2>
+        <div class="facebook_button active"><img class="fb_content" src="assets/facebook_icon.png"/><span class="fb_content">Submit score</span></div>
+      </div>
+      <div class="menu_item menu_button <%= sizeClass %>">MENU</div>
+      <div class="menu_item replay_button <%= sizeClass %>">RETRY</div>
+    </script>
+
+    <!-- Credits -->
+    <script type="text/template" id="_credits">
+      <% var sizeClass = $(window).width() > 550 ? "large" : "small"; %>
+      <div class="credits <%= sizeClass %>">
+        <h2>Created By</h2>
+        <p class="parse">Parse</p>
+        <div class="tutorial">
+          <div class="icon" />
+          <a href="http://parse.com/anyyolk">Check out the tutorial!</a>
+        </div>
+      </div>
+      <div class="menu_item back_button">BACK</div>    
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,1073 @@
+@import "compass/reset";
+@import "compass/utilities";
+@import "compass/css3";
+
+/*
+  Animations 
+ */
+
+//Animate Mixins
+@mixin animation($name: fadeIn, $duration: 1s, $delay: 0s, $function: ease, $iterations: 1, $direction: normal, $mode: both) {
+  @each $prefix in webkit, moz, ms {
+    #{""}-#{$prefix}-animation: $name $duration $delay $function $iterations $direction $mode;
+  }
+  animation: $name $duration $delay $function $iterations $direction $mode;
+}
+  
+@mixin animation-name($name) {
+  @include experimental(animation-name, $name);
+}
+ 
+@mixin animation-duration($duration) {
+  @include experimental(animation-duration, $duration);
+}
+ 
+@mixin animation-delay($delay) {
+  @include experimental(animation-delay, $delay);
+}
+
+/* Clouds */
+@-webkit-keyframes moveLeft {
+  from {margin-left: 0%}
+  to {margin-left: 150%}
+}
+@-moz-keyframes moveLeft {
+  from {margin-left: 0%}
+  to {margin-left: 150%}
+}
+@keyframes moveLeft {
+  from {margin-left: 0%}
+  to {margin-left: 150%}
+}
+
+@-webkit-keyframes moveRight {
+  from {margin-left: 150%}
+  to {margin-left: 0%}
+}
+@-moz-keyframes moveRight {
+  from {margin-left: 150%}
+  to {margin-left: 0%}
+}
+@keyframes moveRight {
+  from {margin-left: 150%}
+  to {margin-left: 0%}
+}
+
+/* Title */
+@-webkit-keyframes dropTitle {
+  0% {margin-top: -50%; -webkit-transform: rotate(-10deg);}
+  70% { -webkit-transform: rotate(10deg);}
+  100% {margin-top: 10%; -webkit-transform: rotate(2deg);}
+}
+@-moz-keyframes dropTitle {
+  0% {margin-top: -50%; -moz-transform: rotate(-10deg);}
+  70% { -moz-transform: rotate(20deg);}
+  100% {margin-top: 10%; -moz-transform: rotate(2deg);}
+}
+@keyframes dropTitle {
+  0% {margin-top: -50%; transform: rotate(-10deg);}
+  70% { transform: rotate(20deg);}
+  100% {margin-top: 10%; transform: rotate(2deg);}
+}
+
+@-webkit-keyframes raiseTitle {
+  0% {margin-top: 10%; -webkit-transform: rotate(2deg);}
+  10% {margin-top: 10%; -webkit-transform: rotate(-10deg);}
+  100% {margin-top: -50%;margin-bottom:70%; -webkit-transform: rotate(2deg);}
+}
+@-moz-keyframes raiseTitle {
+  0% {margin-top: 10%; -moz-transform: rotate(2deg);}
+  10% {margin-top: 10%; -moz-transform: rotate(-10deg);}
+  100% {margin-top: -50%; margin-bottom:70%; -moz-transform: rotate(2deg);}
+}
+@keyframes raiseTitle {
+  0% {margin-top: 10%; transform: rotate(2deg);}
+  10% {margin-top: 10%; transform: rotate(-10deg);}
+  100% {margin-top: -50%; margin-bottom:70%; transform: rotate(2deg);}
+}
+
+
+/* Menu */
+@-webkit-keyframes dropMenu {
+  0% {opacity: 0; -webkit-transform: rotate(-10deg) scale(1.1,1.1); }
+  1% {opacity: 1; -webkit-transform: rotate(-10deg) scale(1.1,1.1); }
+  100% {-webkit-transform: rotate(0deg) scale(1.0,1.0);}
+}
+@-moz-keyframes dropMenu {
+  0% {opacity: 0; -moz-transform: rotate(-10deg) scale(1.1,1.1); }
+  1% {opacity: 1; -moz-transform: rotate(-10deg) scale(1.1,1.1); }
+  100% {-webkit-transform: rotate(0deg) scale(1.0,1.0);}
+}
+@keyframes dropMenu {
+  0% {opacity: 0; transform: rotate(-10deg) scale(1.1,1.1); }
+  1% {opacity: 1; transform: rotate(-10deg) scale(1.1,1.1); }
+  100% {-webkit-transform: rotate(0deg) scale(1.0,1.0);}
+}
+
+@-webkit-keyframes raiseMenu {
+  0% {-webkit-transform: rotate(0deg) scale(1.0,1.0); opacity: 1; }
+  100% {-webkit-transform: rotate(-10deg) scale(1.1,1.1); opacity: 0; }
+}
+@-moz-keyframes raiseMenu {
+  0% {-moz-transform: rotate(0deg) scale(1.0,1.0); opacity: 1; }
+  100% {-moz-transform: rotate(-10deg) scale(1.1,1.1); opacity: 0; }
+}
+@keyframes raiseMenu {
+  0% {transform: rotate(0deg) scale(1.0,1.0); opacity: 1; }
+  100% {transform: rotate(-10deg) scale(1.1,1.1); opacity: 0; }
+}
+
+/* Sun */
+@-webkit-keyframes radiate {
+  0% {-webkit-transform: scale(0.9,0.9);}
+  100% {-webkit-transform: scale(1.1,1.1);}
+}
+@-moz-keyframes radiate {
+  0% {-moz-transform: scale(0.9,0.9);}
+  100% {-moz-transform: scale(1.1,1.1);}
+}
+@keyframes radiate {
+  0% {transform: scale(0.9,0.9);}
+  100% {transform: scale(1.1,1.1);}
+}
+
+/* HUD */
+@-webkit-keyframes showHUD {
+  0% {opacity: 0; -webkit-transform: rotate(-10deg) scale(1.1,1.1); }
+  1% {opacity: 1; -webkit-transform: rotate(-10deg) scale(1.1,1.1); }
+  100% {-webkit-transform: rotate(0deg) scale(1.0,1.0);}
+}
+@-moz-keyframes showHUD {
+  0% {opacity: 0; -moz-transform: rotate(-10deg) scale(1.1,1.1); }
+  1% {opacity: 1; -moz-transform: rotate(-10deg) scale(1.1,1.1); }
+  100% {-moz-transform: rotate(0deg) scale(1.0,1.0);}
+}
+@keyframes showHUD {
+  0% {opacity: 0; transform: rotate(-10deg) scale(1.1,1.1); }
+  1% {opacity: 1; transform: rotate(-10deg) scale(1.1,1.1); }
+  100% {transform: rotate(0deg) scale(1.0,1.0);}
+}
+
+@-webkit-keyframes removeHUD {
+  0% {opacity: 1; -webkit-transform: rotate(0deg) scale(1.0,1.0); }
+  100% {opacity: 0; -webkit-transform: rotate(-10deg) scale(1.1,1.1); }
+}
+@-moz-keyframes removeHUD {
+  0% {opacity: 1; -moz-transform: rotate(0deg) scale(1.0,1.0); }
+  100% {opacity: 0; -moz-transform: rotate(-10deg) scale(1.1,1.1); }
+}
+@keyframes removeHUD {
+  0% {opacity: 1; transform: rotate(0deg) scale(1.0,1.0); }
+  100% {opacity: 0; transform: rotate(-10deg) scale(1.1,1.1); }
+}
+
+/* return button */
+@-webkit-keyframes xDrop {
+  0% {top: -80px;-webkit-transform: rotate(400deg)}
+  90% {top: 20px;-webkit-transform: rotate(30deg)}
+  100% {top: 20px;-webkit-transform: rotate(0deg)}
+}
+@-moz-keyframes xDrop {
+  0% {top: -80px;-moz-transform: rotate(400deg)}
+  90% {top: 20px;-moz-transform: rotate(30deg)}
+  100% {top: 20px;-moz-transform: rotate(0deg)}
+}
+@keyframes xDrop {
+  0% {top: -80px;transform: rotate(400deg)}
+  90% {top: 20px;transform: rotate(30deg)}
+  100% {top: 20px;transform: rotate(0deg)}
+}
+
+@-webkit-keyframes xRaise {
+  0% {top: 20px;-webkit-transform: rotate(0deg)}
+  10% {top: 20px;-webkit-transform: rotate(30deg)}
+  100% {top: -80px;-webkit-transform: rotate(400deg)}
+}
+@-moz-keyframes xRaise {
+  0% {top: 20px;-moz-transform: rotate(0deg)}
+  10% {top: 20px;-moz-transform: rotate(30deg)}
+  100% {top: -80px;-moz-transform: rotate(400deg)}
+}
+@keyframes xRaise {
+  0% {top: 20px;transform: rotate(0deg)}
+  10% {top: 20px;transform: rotate(30deg)}
+  100% {top: -80px;transform: rotate(400deg)}
+}
+
+/* highscore */
+
+@-webkit-keyframes dropScores {
+  0% {-webkit-transform: rotate(-2deg) scale(1.1,1.1); opacity: 0;}
+  1% {-webkit-transform: rotate(-2deg) scale(1.1,1.1); opacity: 1;}
+  100% {-webkit-transform: rotate(1deg) scale(1.0,1.0); opacity: 1}
+}
+@-moz-keyframes dropScores {
+  0% {-moz-transform: rotate(-2deg) scale(1.1,1.1); opacity: 0;}
+  1% {-moz-transform: rotate(-2deg) scale(1.1,1.1); opacity: 1;}
+  100% {-moz-transform: rotate(1deg) scale(1.0,1.0); opacity: 1}
+}
+@keyframes dropScores {
+  0% {transform: rotate(-2deg) scale(1.1,1.1); opacity: 0;}
+  1% {transform: rotate(-2deg) scale(1.1,1.1); opacity: 1;}
+  100% {transform: rotate(1deg) scale(1.0,1.0); opacity: 1}
+}
+
+@-webkit-keyframes raiseScores {
+  0% {-webkit-transform: rotate(1deg) scale(1.0,1.0); opacity: 1}
+  100% {-webkit-transform: rotate(-2deg) scale(1.1,1.1); opacity: 0}
+}
+@-moz-keyframes raiseScores {
+  0% {-moz-transform: rotate(1deg) scale(1.0,1.0); opacity: 1}
+  100% {-moz-transform: rotate(-2deg) scale(1.1,1.1); opacity: 0}
+}
+@keyframes raiseScores {
+  0% {transform: rotate(1deg) scale(1.0,1.0); opacity: 1}
+  100% {transform: rotate(-2deg) scale(1.1,1.1); opacity: 0}
+}
+
+
+/* game over */
+
+@-webkit-keyframes pulsate {
+  0% {-webkit-transform: scale(0.8,0.8);}
+  100% {-webkit-transform: scale(1.2,1.2);}
+}
+@-moz-keyframes pulsate {
+  0% {-moz-transform: scale(0.8,0.8);}
+  100% {-moz-transform: scale(1.2,1.2);}
+}
+@keyframes pulsate {
+  0% {transform: scale(0.8,0.8);}
+  100% {transform: scale(1.2,1.2);}
+}
+
+@-webkit-keyframes dropMessage {
+  0% {opacity: 0; -webkit-transform: rotate(10deg) scale(3.0,3.0); }
+  1% {opacity: 1; -webkit-transform: rotate(10deg) scale(3.0,3.0); }
+  100% {-webkit-transform: rotate(-5deg) scale(1.0,1.0);}
+}
+@-moz-keyframes dropMessage {
+  0% {opacity: 0; -moz-transform: rotate(-10deg) scale(1.1,1.1); }
+  1% {opacity: 1; -moz-transform: rotate(-10deg) scale(1.1,1.1); }
+  100% {-moz-transform: rotate(0deg) scale(1.0,1.0);}
+}
+@keyframes dropMessage {
+  0% {opacity: 0; transform: rotate(-10deg) scale(1.1,1.1); }
+  1% {opacity: 1; transform: rotate(-10deg) scale(1.1,1.1); }
+  100% {transform: rotate(0deg) scale(1.0,1.0);}
+}
+
+@-webkit-keyframes raiseMessage {
+  0% {opacity: 1; -webkit-transform: rotate(-5deg) scale(1.0,1.0); }
+  100% {opacity: 0;-webkit-transform: rotate(10deg) scale(3.0,3.0);}
+}
+@-moz-keyframes raiseMessage {
+  0% {opacity: 1; -moz-transform: rotate(-5deg) scale(1.0,1.0); }
+  100% {opacity: 0;-moz-transform: rotate(10deg) scale(3.0,3.0);}
+}
+@keyframes raiseMessage {
+  0% {opacity: 1; transform: rotate(-5deg) scale(1.0,1.0); }
+  100% {opacity: 0;transform: rotate(10deg) scale(3.0,3.0);}
+}
+
+
+/* Styles */
+
+// Style mixin helpers
+@mixin panel($fromColor, $toColor, $highlight) {
+  display: block;
+  width: 110px;
+  text-decoration: none;
+  @include filter-gradient($fromColor, $toColor, vertical); // IE6-9
+  @include background-image(linear-gradient($fromColor, $toColor));
+  text-align: center;
+  padding: 0px 30px;
+  height: 50px;
+  line-height: 32px;
+  @include border-top-left-radius(15px);
+  @include border-bottom-right-radius(15px);
+  color: white;
+  font-size: 13px;
+  font-weight: 400;
+  border: 2px solid darken($toColor, 10%);
+  @include single-text-shadow($highlight, 0, -1px, 0);
+  @include transition(all .1s ease);
+  @include box-shadow(rgba(white, 0.5) 0 1px 0 0 inset, rgba(white, 0.35) 0px 0px 5px inset, rgba(black, 0.15) 0px 2px 2px);
+  outline: 0;
+}
+
+@mixin actionButton($fromColor, $toColor, $hoverFromColor, $hoverToColor, $activeFromColor, $activeToColor) {
+  @include panel($fromColor, $toColor, $activeToColor);
+  cursor: pointer;
+
+  &:hover {
+    @include background-image(linear-gradient($hoverFromColor, $hoverToColor));
+  }
+  &:focus {
+    @include background-image(linear-gradient($hoverFromColor, $hoverToColor));
+  }
+
+  &:active {
+    @include background-image(linear-gradient($activeFromColor, $activeToColor));
+    @include box-shadow(rgba(black,0.4) 0 2px 2px inset, rgba(white,0.4) 0 1px 0);
+    color: #bcbdbe;
+    border: 1px solid darken($toColor, 35%);
+  } 
+}
+
+//For Retina assets
+@mixin image-2x($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+    background-image: url($image);
+    background-size: $width $height;
+  }
+}
+
+//For Retina assets with secondary background
+@mixin image-2x-bg($image, $width, $height, $background) {
+  @media (min--moz-device-pixel-ratio: 1.3),
+         (-o-min-device-pixel-ratio: 2.6/2),
+         (-webkit-min-device-pixel-ratio: 1.3),
+         (min-device-pixel-ratio: 1.3),
+         (min-resolution: 1.3dppx) {
+    @include background(url($image) no-repeat center center, $background);
+    background-size: $width $height, 100% 100%;
+  }
+}
+
+// font
+@font-face {
+  font-family: 'BDCartoon';
+  src: url('../assets/bd_cartoon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Css Stlyes
+
+body {
+  @include background(url(../assets/bg.png) repeat 0 0, #600);
+}
+
+#unsupported {
+  display: none;
+  text-align: center;
+  font-family: BDCartoon, "Helvetica Neue", Helvetica, Arial;
+  font-size: 30px;
+  padding-top: 100px;
+}
+
+#landscape {
+  display: none;
+  text-align: center;
+  font-family: BDCartoon, "Helvetica Neue", Helvetica, Arial;
+  font-size: 30px;
+  padding-top: 100px;
+  color: white;
+}
+
+@media only screen and (orientation:portrait) {
+    #landscape { display:none; }
+    #stage { display:block; }
+}
+@media only screen and (orientation:landscape) and (max-device-height: 568px){
+    #landscape { display:block; }
+    #stage { display:none; }
+}
+
+#stage {  
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  @include background-image(linear-gradient(#A2C9FD, #DDF6FF));
+  background-color: #bcd8fe;
+  max-height: 1000px;
+  margin: auto;
+  height: 1000px;
+  position: relative;
+  overflow: hidden;
+
+  $tileSize: 64px;
+  .tile {
+    width: 100%;
+    background: url(/assets/tiles.png) repeat-x;
+    height: 160px;
+    position: absolute;
+    bottom: 0px;
+    background-size: contain;
+    z-index: 1;
+
+    &.top {
+      bottom: $tileSize - 20;
+    }
+
+    &.bottom {
+      bottom: -10px;
+    }
+  }
+
+  $treeHeight: 300px;
+  .tree {
+    height: $treeHeight;
+    position: absolute;
+    bottom: 90px;
+    z-index: 2;
+  }
+
+  $sunHeight: 128px;
+  .sun {
+    height: $sunHeight;
+    position: absolute;
+    top: 30px;
+    @include animation(radiate, 3s, 0s, ease-in-out, infinite, alternate);
+  }
+
+  $cloudWidth: 200px;
+  .cloud {
+    width: $cloudWidth;
+    position: absolute;
+    background: url(/assets/cloud.png) no-repeat;
+    background-size: contain;
+    height: 110px;
+    opacity: 0.9;
+    z-index: 10;
+    pointer-events: none;
+
+    &.left {
+      @include animation(moveLeft, 1s, 0s, linear, infinite);
+    }
+
+    &.right {
+      @include animation(moveRight, 1s, 0s, linear, infinite);
+    }
+  }
+
+  .menu_scene {
+    .title {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      @include animation(dropTitle, 1s, 0s, cubic-bezier(0.5, 1.3, 0.7, 1));
+      max-width: 500px;
+      width: 90%;
+      height: 175px;
+      background: url(/assets/Logo.png) no-repeat;
+      background-size: 100%;
+      @include image-2x("/assets/Logo@2x.png", 500px, 175px);
+      background-size: contain !important;
+      z-index: 9;
+      position: relative;
+
+      &.removal {
+        @include animation-delay(0.3s);
+      }
+    }
+
+    .menu_item { 
+      @include animation(dropMenu, 0.1s);
+      &.first {
+        @include animation-delay(1.1s);
+
+        &.removal {
+          @include animation-delay(0s);
+        }
+      }
+
+      &.second {
+        @include animation-delay(1.2s);
+
+        &.removal {
+          @include animation-delay(0.1s);
+        }
+      }
+
+      &.third {
+        @include animation-delay(1.3s);
+
+        &.removal {
+          @include animation-delay(0.2s);
+        }
+      }
+
+      &.fourth {
+        @include animation-delay(1.4s);
+
+        &.removal {
+          @include animation-delay(0.3s);
+        }
+      }
+    }
+  }
+
+  .menu_item {
+    @include actionButton(#29D87E, #17B362, #30F387, #0DE46D, #11793A, #19A04F);
+    display: block;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: BDCartoon;
+    font-size: 22px;
+    padding-top: 13px;
+    height: 37px;
+    z-index: 11;
+    position: relative;
+
+    &.large {
+      font-size: 25px;
+      width: 250px;
+    }
+
+    &.small {
+      font-size: 22px;
+      width: 150px;
+    }
+  }
+
+  .game_scene {
+
+    #hud {
+      font-family: BDCartoon;
+      font-size: 30px;
+      color: #149447;
+      position: absolute;
+      top: 30px;
+      left: 30px; 
+
+      p {
+        @include animation(showHUD, 0.2s);
+        line-height: 40px;
+        font-size: 30px;
+        text-shadow: 0 1px 0 #1B724C, rgba(0, 0, 0, 0.15) 0px 2px 2px;
+        color: #159B56;
+
+        &.small {
+          font-size: 20px;
+
+          span {
+            font-size: 15px;
+          }
+        }
+      }
+
+      #game_score {
+        margin-top: 20px;
+        @include animation-delay(0.1s);
+      }
+
+      #game_lives {
+        margin-top: 20px;
+        @include animation-delay(0.2s);
+      }
+
+      span {
+        font-size: 20px;
+      } 
+    }
+
+    .level_label {
+      font-family: BDCartoon;
+      font-size: 30px;
+      text-shadow: 0 1px 0 #1B724C, rgba(0, 0, 0, 0.15) 0px 2px 2px;
+      color: #159B56;
+      display: block;
+      text-align: center;
+      margin-top: 20%;
+      line-height: 40px;
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      @include animation(dropMessage, 0.5s);
+
+      &.removal {
+        @include animation(raiseMessage, 0.5s);
+      }
+    }
+
+    .egg {
+      width: 70px;
+      height: 100px;
+      background: url(/assets/egg_regular.png) no-repeat;
+      @include image-2x("/assets/egg_regular@2x.png", 70px, 100px);
+      background-size: contain;
+      position: absolute;
+      top: -100px;
+      z-index: 3;
+      
+
+      .sprite {
+        height: 100px;
+      }
+
+      &.cracked {
+        background-image: url(/assets/egg_cracked.png);
+        @include image-2x("/assets/egg_cracked@2x.png", 70px, 100px);
+        background-size: contain;
+        height: 112px;
+        -webkit-transform: rotate(-85deg);
+        -moz-transform: rotate(-85deg);
+        transform: rotate(-85deg);
+      }
+
+      &.broken {
+        overflow: visible !important;
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        transform: rotate(0deg);
+        background-image: url(/assets/egg_opened.png);
+        @include image-2x("/assets/egg_opened@2x.png", 155px, 120px);
+        width: 155px;
+        height: 120px;
+        margin-left: -50px;
+        margin-top: 25px;
+      }
+
+      &.flying {
+        top: -1200px !important;
+      }
+
+      .cloud {
+        position: absolute;
+        bottom: -10px !important;
+        width: 70px;
+        background-position: center bottom;
+        @include transition(all .2s ease !important);
+      }
+      .egg_sprite_1 .cloud {
+          height: 0px;
+          opacity: 0 !important;
+      }
+      
+      .egg_sprite_2 .cloud {
+        height: 30px;
+        opacity: 1 !important;
+      }
+      
+      .egg_sprite_3 .cloud {
+        height: 40px;
+      }
+      .egg_sprite_4 .cloud {
+        height: 50px;
+        width: 120px;
+        margin-left: -25px;
+      }
+      .egg_sprite_5 .cloud {
+        height: 70px;
+        width: 120px;
+        margin-left: -25px;
+        bottom: -20px !important;
+      }
+      
+    }
+      
+
+    .back_button {
+      @include animation(xDrop, 0.5s, 0s, linear);
+      @include actionButton(#29D87E, #17B362, #30F387, #0DE46D, #11793A, #19A04F);
+      @include border-radius(50px);
+      width: 0px;
+      height: 35px;
+      padding: 11px 34px 2px 16px;
+      font-family: BDCartoon;
+      font-size: 22px;
+      z-index: 11;
+      position: absolute;    
+      top: 20px;
+      right: 20px;
+    }
+  }
+
+  .game_over_scene {
+    text-align: center;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+
+    .summary {
+      @include animation(dropScores, 0.1s);
+      @include panel(#29D87E, #17B362, #19A04F);
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+      width: 200px;
+      height: 340px;
+      z-index: 11;
+      font-size: 25px;
+      font-family: BDCartoon;
+
+      &.small {
+        margin-top: 20px;
+      }
+
+      .title {
+        font-family: BDCartoon;
+        padding-top: 40px;
+        padding-bottom: 10px;
+        z-index: 200;
+      }
+
+      .end_score {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        @include background-image(linear-gradient(#12854A, #0A723C));
+        @include border-radius(12px);
+        border: 2px solid #165735;
+        text-shadow: 0 -1px 0 #19A04F;
+        box-shadow: rgba(255, 255, 255, 0.5) 0 1px 0 0 inset, rgba(255, 255, 255, 0.35) 0px 0px 5px inset, rgba(0, 0, 0, 0.15) 0px 2px 2px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 150px;
+        font-family: BDCartoon;
+        font-size: 25px;
+
+        span {
+          font-family: BDCartoon;
+
+          &.score {
+            display: block;
+            font-size: 60px;
+            line-height: 50px;
+            padding-top: 25px;
+            @include animation(pulsate, 0.5s, 0s, ease-in-out, infinite, alternate);
+          }
+
+          &.label {
+            display: block;
+            font-size: 15px;
+            padding-bottom: 10px;
+          }
+        }
+      }
+
+      .message {
+        font-family: BDCartoon;
+        padding-top: 10px;
+        @include animation(dropMessage, 0.5s, 0.5s);
+      }
+      
+      .facebook_button {
+        @include actionButton(#7893c3, #2b4483, #a2bcea, #44609a, #4360a9, #1b2e5c);
+        display: block;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: BDCartoon;
+        font-size: 15px;
+        padding-top: 5px;
+        height: 32px;
+        z-index: 11;
+        position: relative;
+        @include border-radius(20px);
+        padding-left: 0;
+        width: 100%;
+        padding-right: 0;
+
+        img {
+          position: relative;
+          top: 4px;
+          margin-right: 10px;
+          margin-bottom: 2px;
+          margin-top: -3px;
+        }
+
+        .spinner {
+          margin-top: -2px;
+        }
+      }
+    }
+
+    .menu_button {
+      display: inline-block;
+      margin-right: 10px;
+
+      @include animation(dropMenu, 0.1s, 0.2s);
+
+      &.removal {
+        @include animation-delay(0.1s);
+      }
+    }
+
+    .replay_button {
+      display: inline-block;
+      margin-left: 10px;
+
+      @include animation(dropMenu, 0.1s, 0.3s);
+
+      &.removal {
+        @include animation-delay(0.2s);
+      }
+    }
+
+    .menu_item.small {
+      padding-left: 0px;
+      padding-right: 0px;
+      margin-top: 15px;
+      width: 120px;
+    }
+  }
+
+  .highscore_scene {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+
+    .highscore {
+      @include animation(dropScores, 0.3s, 1.5s);
+      @include panel(#29D87E, #17B362, #19A04F);
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 20px;
+      width: 500px;
+      height: 410px;
+      z-index: 11;
+      overflow: scroll;
+
+      &.removal {
+        @include animation-delay(0.2s);
+      }
+
+      p {
+        font-family: BDCartoon;
+        font-size: 25px;
+        margin-top: 15px;
+      }
+
+      #score_table {
+        width: 100%;
+        font-family: BDCartoon;
+
+        th {
+          font-size: 15px;
+
+          &.rank {
+            width: 60px;
+          }
+
+          &.name {
+          }
+
+          &.score {
+            width: 80px;
+          }
+
+          &.date {
+            width: 130px;
+          }
+        }
+
+        tr {
+          font-size: 12px;
+
+          td {
+
+            &.rank {
+              font-size: 17px;
+            }
+
+            &.name {
+            }
+
+            &.score {
+              font-size: 17px;
+            }
+
+            &.date {
+              
+            }
+          }
+        }
+      }
+
+      &.small {
+        width: 280px;
+        height: 350px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        #score_table {
+          line-height: 23px;
+
+          th {
+            &.rank {
+              width: 53px;
+            }
+            &.name {
+              font-size: 13px;
+            }
+            &.score {
+              width: 63px;
+            }
+            &.date {
+              width: 75px;
+            }
+          }
+
+          td {
+            margin-top: 10px;
+          }
+
+          td.name {
+            font-size: 13px;
+            line-height: 15px;
+          }
+        }
+      }
+    }
+
+    .back_button {
+      @include animation(dropMenu, 0.2s, 1.7s);
+      margin-top: 10px;
+
+      &.removal {
+        @include animation-delay(0s);
+      }
+    }
+  }
+
+  .credits_scene {
+    font-family: BDCartoon;
+    font-size: 35px;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    top: 40px;
+
+    .credits {
+      @include animation(dropScores, 0.4s, 0.6s);
+      @include panel(#29D87E, #17B362, #19A04F);
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 20px;
+      width: 400px;
+      height: 300px;
+      z-index: 11;
+      overflow: scroll;
+
+      &.removal {
+        @include animation-delay(0.2s);
+      }
+
+      h2 {
+        font-size: 35px;
+        padding-top: 30px;
+      }
+
+      .parse {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 100;
+        font-size: 100px;
+        line-height: 100px;
+      }
+
+      .tutorial {
+        margin-top: 30px;
+
+        .icon {
+          background: url(/assets/apple-touch-icon-144x144-precomposed.png) no-repeat;
+          background-size: contain;
+          width: 80px;
+          height: 80px;
+          float: left;
+          margin-left: 80px;
+        }
+
+        a {
+          font-size: 15px;
+          font-weight: 200;
+          padding-left: 140px;
+          padding-right: 70px;
+          padding-top: 6px;
+          display: block;
+          text-decoration: none;
+          color: #AEE9FF;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      &.small {
+        width: 240px;
+
+        h2 {
+          font-size: 28px;
+        }
+
+        p.parse {
+          font-size: 85px;
+        }
+
+        .tutorial {
+          .icon {
+            margin: 0px;
+          }
+
+          a {
+            padding: 0px;
+          }
+        }
+      }
+    }    
+
+    .back_button {
+      @include animation(dropMenu, 0.2s, 1.0s);
+      margin-top: 10px;
+
+      &.removal {
+        @include animation-delay(0s);
+      }
+    }
+  }
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+@media all and (max-width: 600px) {
+  #stage {
+    .menu_scene {
+      margin-top: -10px;
+      .title {
+        height: 120px;
+      }
+      .menu_item {
+        margin-top: 20px;
+      }
+      .menu_item:first {
+        margin-top: 0;
+      }
+    }
+    .cloud {
+      width: 120px;
+    }
+    .game_scene {
+      #hud {
+        top: 10px;
+        left: 10px;
+        p.small {
+          font-size: 11px;
+          height: 0px;
+          
+          span {
+            font-size: 11px;
+          }
+        }
+      }
+      .back_button {
+        width: 27px;
+        height: 27px;
+        padding: 0px;
+        font-size: 11px;
+        top: 10px;
+        right: 10px;
+      }
+    }
+  }
+}
